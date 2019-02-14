@@ -37,9 +37,9 @@ class Bin{
 		
 		unsigned getNextY() {return nextPos.vertical;}
 		
-		Component2D getNextPos() {return nextPos;}
-		
 		unsigned getCurrentShelfHeight() {return currentShelfHeight;}
+	
+		Component2D getNextPos() {return nextPos;}
 		
 		//Setters
 		void incNextX(unsigned amount) {nextPos.horizontal += amount;}
@@ -57,11 +57,11 @@ class Item{
 		
 		void shelfNextFitInto(Bin *bin)
 		{
-			//check if item fits in the shelf width-wise
+			//if the item doesn't fit in the shelf width-wise, change shelf
 			if(bin->getNextX() + dimensions.horizontal > bin->getWidth())
 				bin->shelfChange();
 				
-			//check if item is taller than the shelf
+			//if the shelf is shorter than the item, make it taller
 			if(dimensions.vertical > bin->getCurrentShelfHeight())
 				bin->setCurrentShelfHeight(dimensions.vertical);
 				
@@ -78,7 +78,7 @@ class Item{
 					position; //Topleft corner
 };
 
-int main(void)
+int main()
 {
 	Bin bin;
 	srand(time(NULL));
